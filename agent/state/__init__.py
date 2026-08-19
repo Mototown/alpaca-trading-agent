@@ -1,0 +1,1 @@
+"""state package — SQLite persistence"""

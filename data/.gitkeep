@@ -1,0 +1,2 @@
+# SQLite database files are created here at runtime.
+# This file keeps the data/ directory tracked by git while ignoring the DB itself.
