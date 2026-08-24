@@ -6,7 +6,7 @@ All settings are loaded from environment variables (or a .env file).
 
 from __future__ import annotations
 
-from pydantic import Field
+from pydantic import Field, field_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
@@ -32,6 +32,18 @@ class Config(BaseSettings):
 
     # ── Watchlist ────────────────────────────────────────────────────────────
     watchlist: list[str] = Field(default=["SPY", "QQQ", "AAPL", "MSFT"])
+
+    @field_validator("watchlist", mode="before")
+    @classmethod
+    def parse_watchlist(cls, v: object) -> list[str]:
+        """Accept both JSON array and bare CSV string from .env."""
+        if isinstance(v, str):
+            v = v.strip()
+            if v.startswith("["):
+                import json as _json
+                return _json.loads(v)
+            return [s.strip() for s in v.split(",") if s.strip()]
+        return v  # type: ignore[return-value]
 
     # ── Loop ─────────────────────────────────────────────────────────────────
     loop_interval_seconds: int = 300
