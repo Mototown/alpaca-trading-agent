@@ -1,8 +1,10 @@
 # DAHA — Dynamic Adaptive Hedging Agent
 
-> **Alpaca AI Trading Agents Hackathon 2026** · Solo dev · Paper trading
+> **Alpaca AI Trading Agents Hackathon 2026** · Solo dev · Paper trading · MIT
 
 DAHA is a fully autonomous options trading agent that continuously hedges a long equity portfolio using a **Thesis Debate + Risk Arbiter** architecture. Every 5 minutes it gathers live market data via the **Alpaca MCP server**, runs three competing sub-agents (bull, bear, neutral), scores their proposals through a Risk Arbiter, and places multi-leg options hedges — all without human intervention.
+
+**One-page write-up (required for judges):** [WRITEUP.md](WRITEUP.md) · **Submission packet:** [SUBMISSION.md](SUBMISSION.md)
 
 ---
 
@@ -29,7 +31,7 @@ Each tick is fully logged: proposals, scores, winner reasoning, and Greeks are p
 ### 2. Install
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/alpaca-trading-agent
+git clone https://github.com/Mototown/alpaca-trading-agent
 cd alpaca-trading-agent
 uv sync
 ```
@@ -38,7 +40,7 @@ uv sync
 
 ```bash
 cp .env.example .env
-# Edit .env with your Alpaca paper API key and secret
+# Edit .env with your Alpaca *paper* API key and secret
 ```
 
 ### 4. Start the Alpaca MCP server
@@ -56,7 +58,7 @@ docker run -d \
 ### 5. Run the agent
 
 ```bash
-# Dry-run (no real orders placed, great for testing)
+# Dry-run (no orders placed, great for testing)
 uv run python -m agent.main --dry-run
 
 # Single tick (run once and exit)
@@ -160,19 +162,6 @@ All tests run offline — no Alpaca credentials needed.
 
 ---
 
-## 7-Day Roadmap
-
-| Day | Milestone |
-|---|---|
-| 1–2 | Foundation + first real option order placed autonomously |
-| 3 | LLM-powered sub-agents (GPT-4o structured output) |
-| 4 | Dashboard + position rolling logic |
-| 5 | IV rank from 52-week history |
-| 6 | Iron condor on SPY + end-of-day report |
-| 7 | Polish, README, demo video |
-
----
-
 ## Configuration Reference
 
 All settings live in `.env` (see `.env.example`):
@@ -192,4 +181,4 @@ All settings live in `.env` (see `.env.example`):
 
 ---
 
-*Built for the Alpaca AI Trading Agents Hackathon, Aug 28 – Sep 4 2026.*
+*Built for the Alpaca AI Trading Agents Hackathon, Aug 28 – Sep 4 2026. Paper trading only. Not investment advice.*
